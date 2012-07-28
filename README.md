@@ -1,6 +1,6 @@
 # mvnsearch
 
-Searching Java/Scala with [Sonatype's API](http://repository.sonatype.org/service/local/data_index?q=maven)
+Searching Java/Scala library with [Sonatype's API](http://repository.sonatype.org/service/local/data_index?q=maven)
 
 # Install
 
