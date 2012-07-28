@@ -24,8 +24,6 @@
 ;;;
 ;;; Code:
 
-;;; find files in current project
-
 (require 'helm)
 
 (defun mvnsearch ()
