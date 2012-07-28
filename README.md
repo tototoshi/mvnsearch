@@ -2,7 +2,7 @@
 
 Searching Java/Scala library with [Sonatype's API](http://repository.sonatype.org/service/local/data_index?q=maven)
 
-# Install
+## Install
 
 via [conscript](https://github.com/n8han/conscript/)
 
