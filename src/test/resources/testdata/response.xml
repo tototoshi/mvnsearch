@@ -1,0 +1,32 @@
+<search-results>
+  <totalCount>79011</totalCount>
+  <from>-1</from>
+  <count>-1</count>
+  <tooManyResults>true</tooManyResults>
+  <data>
+    <artifact>
+      <resourceURI>https://repository.sonatype.org/service/local/repositories/third-party/content/org/apache/maven/surefire/maven-surefire-common/2.7-SONATYPE-1033415/maven-surefire-common-2.7-SONATYPE-1033415.jar</resourceURI>
+      <groupId>org.apache.maven.surefire</groupId>
+      <artifactId>maven-surefire-common</artifactId>
+      <version>2.7-SONATYPE-1033415</version>
+      <packaging>jar</packaging>
+      <extension>jar</extension>
+      <repoId>third-party</repoId>
+      <contextId>3rd Party</contextId>
+      <pomLink>https://repository.sonatype.org/service/local/artifact/maven/redirect?r=third-party&amp;g=org.apache.maven.surefire&amp;a=maven-surefire-common&amp;v=2.7-SONATYPE-1033415&amp;e=pom</pomLink>
+      <artifactLink>https://repository.sonatype.org/service/local/artifact/maven/redirect?r=third-party&amp;g=org.apache.maven.surefire&amp;a=maven-surefire-common&amp;v=2.7-SONATYPE-1033415&amp;e=jar</artifactLink>
+    </artifact>
+    <artifact>
+      <resourceURI>https://repository.sonatype.org/service/local/repositories/third-party/content/org/apache/maven/plugins/maven-surefire-report-plugin/2.7-SONATYPE-1033415/maven-surefire-report-plugin-2.7-SONATYPE-1033415.jar</resourceURI>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-surefire-report-plugin</artifactId>
+      <version>2.7-SONATYPE-1033415</version>
+      <packaging>maven-plugin</packaging>
+      <extension>jar</extension>
+      <repoId>third-party</repoId>
+      <contextId>3rd Party</contextId>
+      <pomLink>https://repository.sonatype.org/service/local/artifact/maven/redirect?r=third-party&amp;g=org.apache.maven.plugins&amp;a=maven-surefire-report-plugin&amp;v=2.7-SONATYPE-1033415&amp;e=pom</pomLink>
+      <artifactLink>https://repository.sonatype.org/service/local/artifact/maven/redirect?r=third-party&amp;g=org.apache.maven.plugins&amp;a=maven-surefire-report-plugin&amp;v=2.7-SONATYPE-1033415&amp;e=jar</artifactLink>
+    </artifact>
+  </data>
+</search-results>
