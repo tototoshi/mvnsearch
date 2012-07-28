@@ -8,3 +8,4 @@
 [repositories]
   local
   tototoshi.github.com: http://tototoshi.github.com/maven-repo/releases
+  maven-central
