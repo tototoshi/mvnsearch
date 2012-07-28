@@ -4,12 +4,16 @@ import java.net.URLEncoder
 import scala.io.Source
 
 
-class Exit(val code: Int) extends xsbti.Exit
-
-object Main extends xsbti.AppMain with ResponseParser with Using with StringUtil with SearchResultFilter {
+class Main extends xsbti.AppMain {
 
   def run(config: xsbti.AppConfiguration): Exit =
     new Exit(Main.main(config.arguments))
+
+}
+
+class Exit(val code: Int) extends xsbti.Exit
+
+object Main extends ResponseParser with Using with StringUtil with SearchResultFilter {
 
   case class Config(searchWord: String, scalaVersion: Option[String], version: Option[String])
 
