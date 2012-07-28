@@ -17,7 +17,7 @@ object Main extends ResponseParser with Using with StringUtil with SearchResultF
 
   case class Config(searchWord: String, scalaVersion: Option[String], version: Option[String])
 
-  val parser = new scopt.immutable.OptionParser[Config]("mvnsearch", "0.1") { def options = Seq(
+  val parser = new scopt.immutable.OptionParser[Config]("mvnsearch", "0.1.2") { def options = Seq(
     arg("<word>", "search word") { (w: String, c: Config) => c.copy(searchWord = w) },
     opt("s", "scala-version", "scala version") { (s: String, c: Config) => c.copy(scalaVersion = Some(s)) },
     opt("v", "version", "version") { (v: String, c: Config) => c.copy(version = Some(v)) }
