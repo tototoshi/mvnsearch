@@ -1,15 +1,17 @@
 package com.github.tototoshi.mvnsearch
 
-import org.specs2.mutable._
+import org.scalatest.FunSpec
+import org.scalatest.matchers._
 
-class MainSpec extends Specification {
+class MainSpec extends FunSpec with ShouldMatchers {
+  describe("Main") {
 
-  "Main" should {
-
-    "search" in {
-      Main.search(List("scopt")) must contain(Dependency("com.github.scopt", "scopt_2.9.1", "2.1.0"))
+    it("should search libraries from maven repository") {
+      val result = Main.search(List("scopt"))
+      val scoptDep = Dependency("com.github.scopt", "scopt_2.9.1", "2.1.0")
+      result should contain (scoptDep)
     }
 
   }
-
 }
+

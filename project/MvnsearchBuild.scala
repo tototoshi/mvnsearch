@@ -15,7 +15,7 @@ object MvnsearchBuild extends Build {
       resolvers <+= sbtResolver,
       libraryDependencies ++= Seq(
         "com.github.scopt" %% "scopt" % "2.1.0",
-        "org.specs2" %% "specs2" % "1.11" % "test",
+        "org.scalatest" %% "scalatest" % "1.9.1" % "test",
         "org.scala-sbt" %% "launcher-interface" % "0.11.3" % "provided"
       )
     )

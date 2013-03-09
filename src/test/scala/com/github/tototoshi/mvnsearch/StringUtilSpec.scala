@@ -1,15 +1,13 @@
 package com.github.tototoshi.mvnsearch
 
-import org.specs2.mutable._
+import org.scalatest.FunSpec
+import org.scalatest.matchers._
 
-class StringUtilSpec extends Specification with StringUtil {
+class StringUtilSpec extends FunSpec with ShouldMatchers with StringUtil {
 
-  "StringUtil" should {
-
-    "quote string" in {
-      quote("a") === "\"a\""
+  describe("StringUtil") {
+    it("should quote string") {
+      quote("a") should be ("\"a\"")
     }
-
   }
-
 }
