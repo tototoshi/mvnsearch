@@ -1,6 +1,7 @@
 package com.github.tototoshi.mvnsearch
 
 import scala.xml.XML
+import scala.language.postfixOps
 
 trait ResponseParser {
 
