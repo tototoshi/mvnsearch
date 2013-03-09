@@ -9,7 +9,7 @@ object MvnsearchBuild extends Build {
     settings = Project.defaultSettings ++ Seq(
       name := "mvnsearch",
       organization := "com.github.tototoshi",
-      version := "0.2.0",
+      version := "0.2.1",
       scalaVersion := "2.10.0",
       resolvers += "sonatype-public" at "https://oss.sonatype.org/content/groups/public",
       resolvers <+= sbtResolver,

@@ -32,7 +32,7 @@ object Main extends ResponseParser with Using with StringUtil {
 
   case class Config(searchWord: List[String])
 
-  val parser = new scopt.immutable.OptionParser[Config]("mvnsearch", "0.1.2") { def options = Seq(
+  val parser = new scopt.immutable.OptionParser[Config]("mvnsearch", "0.2.1") { def options = Seq(
     arglist("<word>", "search word") { (w: String, c: Config) => c.copy(searchWord = c.searchWord ++ List(w)) }
   ) }
 
