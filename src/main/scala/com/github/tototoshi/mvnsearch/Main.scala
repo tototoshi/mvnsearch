@@ -68,7 +68,8 @@ object Main extends Using with StringUtil {
 
   def main(args: Array[String]): Unit = {
     val config = parser.parse(args, Config(Nil)).getOrElse(throw new IllegalArgumentException)
-    search(config.searchWord).foreach(println)
+    val out = Printer.print(search(config.searchWord))
+    println(out)
   }
 
 }

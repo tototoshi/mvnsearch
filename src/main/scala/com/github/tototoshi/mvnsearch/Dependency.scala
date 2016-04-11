@@ -15,6 +15,15 @@
 */
 package com.github.tototoshi.mvnsearch
 
-case class Dependency(groupId: String, artifactId: String, version: String) extends StringUtil {
-  override def toString = """%s %% %s %% %s""".format(quote(groupId), quote(artifactId), quote(version))
+case class Dependency(groupId: String, artifactId: String, version: String) {
+
+  private val versionRegex = """(.*?)_([0-9].+?)$""".r
+
+  val (scalaArtifact, scalaVersion): (Option[String], Option[String]) = artifactId match {
+    case versionRegex(a, v) => (Some(a), Some(v))
+    case _ => (None, None)
+  }
+
+  val isScala = scalaVersion.nonEmpty
+
 }
