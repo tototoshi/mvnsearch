@@ -29,11 +29,12 @@ class Main extends xsbti.AppMain {
 
 class Exit(val code: Int) extends xsbti.Exit
 
-object Main extends Using with StringUtil {
+object Main extends Using {
 
-  case class Config(searchWord: List[String])
+  case class Config(searchWord: List[String], rows: Int)
 
   val parser = new scopt.OptionParser[Config]("mvnsearch") {
+    opt[Int]("rows") action { (rows, c) => c.copy(rows = rows) }
     arg[String]("<word>") unbounded() action { (w: String, c: Config) => c.copy(searchWord = c.searchWord ++ List(w)) }
   }
 
@@ -48,8 +49,8 @@ object Main extends Using with StringUtil {
     } yield Dependency(g, a, v)
   }
 
-  def search(searchWord: List[String]): Seq[Dependency] = {
-    val params = Map("q" -> searchWord.mkString(" "))
+  def search(config: Config): Seq[Dependency] = {
+    val params = Map("q" -> config.searchWord.mkString(" "), "rows" -> config.rows)
     val response = Http.get("http://search.maven.org/solrsearch/select", params)
     parseResponse(response)
   }
@@ -67,9 +68,10 @@ object Main extends Using with StringUtil {
   }
 
   def main(args: Array[String]): Unit = {
-    val config = parser.parse(args, Config(Nil)).getOrElse(throw new IllegalArgumentException)
-    val out = Printer.print(search(config.searchWord))
-    println(out)
+    parser.parse(args, Config(Nil, 20)).foreach { config =>
+      val out = Printer.print(search(config))
+      println(out)
+    }
   }
 
 }
