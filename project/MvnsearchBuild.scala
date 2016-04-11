@@ -10,14 +10,16 @@ object MvnsearchBuild extends Build {
       name := "mvnsearch",
       organization := "com.github.tototoshi",
       version := "0.2.1",
-      scalaVersion := "2.10.0",
+      scalaVersion := "2.11.8",
       resolvers += "sonatype-public" at "https://oss.sonatype.org/content/groups/public",
       resolvers <+= sbtResolver,
       scalacOptions ++= Seq("-feature"),
       libraryDependencies ++= Seq(
-        "com.github.scopt" %% "scopt" % "2.1.0",
-        "org.scalatest" %% "scalatest" % "1.9.1" % "test",
-        "org.scala-sbt" % "command" % "0.12.2"
+        "com.github.scopt" %% "scopt" % "3.4.0",
+        "org.scalatest" %% "scalatest" % "2.2.5" % "test",
+        "org.scala-sbt" % "command" % "0.13.11",
+        "org.scala-sbt" % "launcher-interface" % "0.13.11",
+        "org.json4s" %% "json4s-jackson" % "3.3.0"
       )
     ) ++ publishingSettings
   )

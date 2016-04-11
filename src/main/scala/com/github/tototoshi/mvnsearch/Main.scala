@@ -17,7 +17,8 @@ package com.github.tototoshi.mvnsearch
 
 import java.net.URLEncoder
 import scala.io.Source
-
+import org.json4s._
+import org.json4s.jackson.JsonMethods._
 
 class Main extends xsbti.AppMain {
 
@@ -28,19 +29,29 @@ class Main extends xsbti.AppMain {
 
 class Exit(val code: Int) extends xsbti.Exit
 
-object Main extends ResponseParser with Using with StringUtil {
+object Main extends Using with StringUtil {
 
   case class Config(searchWord: List[String])
 
-  val parser = new scopt.immutable.OptionParser[Config]("mvnsearch", "0.2.1") { def options = Seq(
-    arglist("<word>", "search word") { (w: String, c: Config) => c.copy(searchWord = c.searchWord ++ List(w)) }
-  ) }
+  val parser = new scopt.OptionParser[Config]("mvnsearch") {
+    arg[String]("<word>") unbounded() action { (w: String, c: Config) => c.copy(searchWord = c.searchWord ++ List(w)) }
+  }
 
-  def search(searchWord: List[String]): Set[Dependency] = {
-    val url = "http://repository.sonatype.org/service/local/data_index?q=" + URLEncoder.encode(searchWord.mkString(" "), "utf-8")
+  def parseResponse(json: String): List[Dependency] = {
+    val ast = parse(json)
+    for {
+      JObject(doc) <- ast \ "response" \ "docs"
+      docMap = doc.toMap
+      JString(g) <- docMap.get("g")
+      JString(a) <- docMap.get("a")
+      JString(v) <- docMap.get("latestVersion")
+    } yield Dependency(g, a, v)
+  }
+
+  def search(searchWord: List[String]): Seq[Dependency] = {
+    val url = "http://search.maven.org/solrsearch/select?q=" + URLEncoder.encode(searchWord.mkString(" "), "utf-8")
     using(Source.fromURL(url)) { src =>
-      val responseAsString = src.getLines.mkString("\n")
-      parseResponse(responseAsString).toSet
+      parseResponse(src.mkString)
     }
   }
 
@@ -60,7 +71,6 @@ object Main extends ResponseParser with Using with StringUtil {
     val config = parser.parse(args, Config(Nil)).getOrElse(throw new IllegalArgumentException)
     search(config.searchWord).foreach(println)
   }
-
 
 }
 
