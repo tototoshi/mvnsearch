@@ -49,10 +49,9 @@ object Main extends Using with StringUtil {
   }
 
   def search(searchWord: List[String]): Seq[Dependency] = {
-    val url = "http://search.maven.org/solrsearch/select?q=" + URLEncoder.encode(searchWord.mkString(" "), "utf-8")
-    using(Source.fromURL(url)) { src =>
-      parseResponse(src.mkString)
-    }
+    val params = Map("q" -> searchWord.mkString(" "))
+    val response = Http.get("http://search.maven.org/solrsearch/select", params)
+    parseResponse(response)
   }
 
   def run(args: Array[String]): Int = {
