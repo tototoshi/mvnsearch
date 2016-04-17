@@ -1,5 +1,5 @@
 [app]
-  version: 0.3.0
+  version: 0.3.1
   org: com.github.tototoshi
   name: mvnsearch_2.11
   class: com.github.tototoshi.mvnsearch.Main

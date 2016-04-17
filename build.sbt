@@ -30,10 +30,11 @@ val publishingSettings = Seq(
 )
 
 lazy val mvnsearch = (project in file(".")).
+  enablePlugins(ConscriptPlugin).
   settings(
   name := "mvnsearch",
   organization := "com.github.tototoshi",
-  version := "0.3.0",
+  version := "0.3.1",
   scalaVersion := "2.11.8",
   resolvers += "sonatype-public" at "https://oss.sonatype.org/content/groups/public",
   resolvers <+= sbtResolver,
