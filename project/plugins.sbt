@@ -1,4 +1,4 @@
-addSbtPlugin("net.databinder" % "conscript-plugin" % "0.3.5")
+addSbtPlugin("org.foundweekends.conscript" % "sbt-conscript" % "0.5.0")
 
 addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % "1.1")
 
