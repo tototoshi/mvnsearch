@@ -15,15 +15,16 @@
 */
 package com.github.tototoshi.mvnsearch
 
-import org.scalatest.FunSpec
-import org.scalatest.matchers._
+import org.scalatest.{FunSpec, Matchers}
+import Main.Config
 
-class MainSpec extends FunSpec with ShouldMatchers {
+class MainSpec extends FunSpec with Matchers {
   describe("Main") {
 
     it("should search libraries from maven repository") {
-      val result = Main.search(List("scopt"))
-      val scoptDep = Dependency("com.github.scopt", "scopt_2.9.1", "2.1.0")
+      val config = Config(List("scopt"), 100)
+      val result = Main.search(config)
+      val scoptDep = Dependency("com.github.scopt", "scopt_2.11", "3.4.0")
       result should contain (scoptDep)
     }
 
