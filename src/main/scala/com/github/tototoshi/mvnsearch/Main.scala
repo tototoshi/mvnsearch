@@ -25,8 +25,8 @@ object Main extends Using {
   case class Config(searchWord: List[String], rows: Int)
 
   val parser = new scopt.OptionParser[Config]("mvnsearch") {
-    opt[Int]("rows") action { (rows, c) => c.copy(rows = rows) }
-    arg[String]("<word>") unbounded() action { (w: String, c: Config) => c.copy(searchWord = c.searchWord ++ List(w)) }
+    opt[Int]("rows").action { (rows, c) => c.copy(rows = rows) }
+    arg[String]("<word>").action { (w: String, c: Config) => c.copy(searchWord = c.searchWord ++ List(w)) }.unbounded()
   }
 
   def parseResponse(json: String): List[Dependency] = {
