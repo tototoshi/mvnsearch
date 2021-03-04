@@ -1,4 +1,5 @@
 lazy val mvnsearch = project.in(file("."))
+  .enablePlugins(BuildInfoPlugin)
   .settings(
     name := "mvnsearch",
     organization := "com.github.tototoshi",
@@ -10,6 +11,8 @@ lazy val mvnsearch = project.in(file("."))
       "org.json4s" %% "json4s-jackson" % "3.6.11",
       "org.scalatest" %% "scalatest" % "3.2.5" % "test",
     ),
+    buildInfoKeys := Seq[BuildInfoKey](name, version, scalaVersion, sbtVersion),
+    buildInfoPackage := "com.github.tototoshi.mvnsearch.buildinfo",
     publishMavenStyle := true,
     publishTo := _publishTo(version.value),
     publishArtifact in Test := false,

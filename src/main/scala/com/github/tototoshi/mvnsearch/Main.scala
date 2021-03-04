@@ -15,21 +15,24 @@
 */
 package com.github.tototoshi.mvnsearch
 
-import java.net.URLEncoder
-import scala.io.Source
-import org.json4s._
-import org.json4s.jackson.JsonMethods._
+import com.github.tototoshi.mvnsearch.buildinfo.BuildInfo
 
 object Main extends Using {
 
   case class Config(searchWord: List[String], rows: Int)
 
   val parser = new scopt.OptionParser[Config]("mvnsearch") {
-    opt[Int]("rows").action { (rows, c) => c.copy(rows = rows) }
-    arg[String]("<word>").action { (w: String, c: Config) => c.copy(searchWord = c.searchWord ++ List(w)) }.unbounded()
+    head(BuildInfo.name, BuildInfo.version)
+    version('v', "version").text("Print the version")
+    help('h', "help").text("Print a help")
+    opt[Int]("rows").action { (rows, c) => c.copy(rows = rows) }.text("Specify the number of rows")
+    arg[String]("<word>").action { (w: String, c: Config) => c.copy(searchWord = c.searchWord ++ List(w)) }.unbounded().text("Specify search words")
   }
 
   def parseResponse(json: String): List[Dependency] = {
+    import org.json4s._
+    import org.json4s.jackson.JsonMethods._
+
     val ast = parse(json)
     for {
       JObject(doc) <- ast \ "response" \ "docs"
