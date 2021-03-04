@@ -20,15 +20,6 @@ import scala.io.Source
 import org.json4s._
 import org.json4s.jackson.JsonMethods._
 
-class Main extends xsbti.AppMain {
-
-  def run(config: xsbti.AppConfiguration): Exit =
-    new Exit(Main.run(config.arguments))
-
-}
-
-class Exit(val code: Int) extends xsbti.Exit
-
 object Main extends Using {
 
   case class Config(searchWord: List[String], rows: Int)
@@ -55,18 +46,6 @@ object Main extends Using {
     parseResponse(response)
   }
 
-  def run(args: Array[String]): Int = {
-    try {
-      main(args)
-      0
-    } catch {
-      case e: IllegalArgumentException => {
-        println("search word required.")
-        1
-      }
-    }
-  }
-
   def main(args: Array[String]): Unit = {
     parser.parse(args, Config(Nil, 20)).foreach { config =>
       val out = Printer.print(search(config))
@@ -75,4 +54,3 @@ object Main extends Using {
   }
 
 }
-
