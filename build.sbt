@@ -7,7 +7,7 @@ lazy val mvnsearch = project.in(file("."))
     scalaVersion := "2.13.5",
     scalacOptions ++= Seq("-feature"),
     libraryDependencies ++= Seq(
-      "com.github.scopt" %% "scopt" % "4.0.0",
+      "com.github.scopt" %% "scopt" % "4.0.1",
       "org.json4s" %% "json4s-jackson" % "3.6.11",
       "org.scalatest" %% "scalatest" % "3.2.5" % "test",
     ),
