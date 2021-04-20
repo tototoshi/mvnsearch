@@ -9,7 +9,7 @@ lazy val mvnsearch = project.in(file("."))
     libraryDependencies ++= Seq(
       "com.github.scopt" %% "scopt" % "4.0.1",
       "org.json4s" %% "json4s-jackson" % "3.6.11",
-      "org.scalatest" %% "scalatest" % "3.2.7" % "test",
+      "org.scalatest" %% "scalatest" % "3.2.8" % "test",
     ),
     buildInfoKeys := Seq[BuildInfoKey](name, version, scalaVersion, sbtVersion),
     buildInfoPackage := "com.github.tototoshi.mvnsearch.buildinfo",
