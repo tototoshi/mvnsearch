@@ -15,7 +15,7 @@ lazy val mvnsearch = project.in(file("."))
     buildInfoPackage := "com.github.tototoshi.mvnsearch.buildinfo",
     publishMavenStyle := true,
     publishTo := _publishTo(version.value),
-    publishArtifact in Test := false,
+    Test / publishArtifact := false,
     pomExtra := _pomExtra
   )
 
