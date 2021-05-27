@@ -1,13 +1,13 @@
 package com.github.tototoshi.mvnsearch
 
 import java.net.URLEncoder
-
 import scala.io.Source
+import scala.util.Using
 
-object Http extends Using {
+object Http {
 
   def get(url: String, params: Map[String, Any]): String = {
-    using(Source.fromURL(url + buildQuery(params))) { src => src.mkString }
+    Using.resource(Source.fromURL(url + buildQuery(params))) { src => src.mkString }
   }
 
   private def buildQuery(params: Map[String, Any]): String =

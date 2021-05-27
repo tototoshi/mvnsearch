@@ -17,7 +17,7 @@ package com.github.tototoshi.mvnsearch
 
 import com.github.tototoshi.mvnsearch.buildinfo.BuildInfo
 
-object Main extends Using {
+object Main {
 
   case class Config(searchWord: List[String], rows: Int)
 
