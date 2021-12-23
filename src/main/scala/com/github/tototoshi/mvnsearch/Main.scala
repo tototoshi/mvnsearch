@@ -45,7 +45,7 @@ object Main {
 
   def search(config: Config): Seq[Dependency] = {
     val params = Map("q" -> config.searchWord.mkString(" "), "rows" -> config.rows)
-    val response = Http.get("http://search.maven.org/solrsearch/select", params)
+    val response = Http.get("https://search.maven.org/solrsearch/select", params)
     parseResponse(response)
   }
 
