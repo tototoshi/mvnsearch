@@ -3,7 +3,7 @@ lazy val mvnsearch = project.in(file("."))
   .settings(
     name := "mvnsearch",
     organization := "com.github.tototoshi",
-    version := "0.4.1",
+    version := "0.4.2-SNAPSHOT",
     scalaVersion := "2.13.7",
     scalacOptions ++= Seq("-feature"),
     libraryDependencies ++= Seq(
