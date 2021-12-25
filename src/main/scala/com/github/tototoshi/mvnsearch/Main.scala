@@ -15,13 +15,16 @@
 */
 package com.github.tototoshi.mvnsearch
 
+import cats.effect.{ExitCode, IO, IOApp}
+import cats.implicits._
 import com.github.tototoshi.mvnsearch.buildinfo.BuildInfo
+import org.slf4j.LoggerFactory
 
-object Main {
+object Main extends IOApp {
 
-  case class Config(searchWord: List[String], rows: Int)
+  private val logger = LoggerFactory.getLogger(getClass)
 
-  val parser = new scopt.OptionParser[Config]("mvnsearch") {
+  private val parser = new scopt.OptionParser[Config]("mvnsearch") {
     head(BuildInfo.name, BuildInfo.version)
     version('v', "version").text("Print the version")
     help('h', "help").text("Print a help")
@@ -29,30 +32,17 @@ object Main {
     arg[String]("<word>").action { (w: String, c: Config) => c.copy(searchWord = c.searchWord ++ List(w)) }.unbounded().text("Specify search words")
   }
 
-  def parseResponse(json: String): List[Dependency] = {
-    import org.json4s._
-    import org.json4s.jackson.JsonMethods._
-
-    val ast = parse(json)
+  private def program(config: Config): IO[Unit] =
     for {
-      JObject(doc) <- ast \ "response" \ "docs"
-      docMap = doc.toMap
-      JString(g) <- docMap.get("g")
-      JString(a) <- docMap.get("a")
-      JString(v) <- docMap.get("latestVersion")
-    } yield Dependency(g, a, v)
-  }
+      dependencies <- MavenSearch.search(config)
+      out = Printer.print(dependencies)
+      _ <- IO.println(out)
+    } yield ()
 
-  def search(config: Config): Seq[Dependency] = {
-    val params = Map("q" -> config.searchWord.mkString(" "), "rows" -> config.rows)
-    val response = Http.get("https://search.maven.org/solrsearch/select", params)
-    parseResponse(response)
-  }
-
-  def main(args: Array[String]): Unit = {
-    parser.parse(args, Config(Nil, 20)).foreach { config =>
-      val out = Printer.print(search(config))
-      println(out)
+  override def run(args: List[String]): IO[ExitCode] = {
+    parser.parse(args, Config(Nil, 20)) match {
+      case Some(config) => program(config).map(_ => ExitCode.Success)
+      case None => IO.pure(ExitCode.Error)
     }
   }
 

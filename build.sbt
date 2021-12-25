@@ -8,7 +8,12 @@ lazy val mvnsearch = project.in(file("."))
     scalacOptions ++= Seq("-feature"),
     libraryDependencies ++= Seq(
       "com.github.scopt" %% "scopt" % "4.0.1",
-      "org.json4s" %% "json4s-jackson" % "4.0.3",
+      "io.circe" %% "circe-core" % "0.14.1",
+      "io.circe" %% "circe-parser" % "0.14.1",
+      "io.circe" %% "circe-generic" % "0.14.1",
+      "org.typelevel" %% "cats-effect" % "3.3.1",
+      "org.slf4j" % "slf4j-api" % "1.7.32",
+      "ch.qos.logback" % "logback-classic" % "1.2.10",
       "org.scalatest" %% "scalatest" % "3.2.10" % "test",
     ),
     buildInfoKeys := Seq[BuildInfoKey](name, version, scalaVersion, sbtVersion),
