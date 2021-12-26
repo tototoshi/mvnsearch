@@ -1,33 +1,26 @@
 package com.github.tototoshi.mvnsearch
 
-import cats.effect.IO
+import cats.Monad
+import cats.effect.Sync
 import org.slf4j.LoggerFactory
-import org.slf4j.{ Logger => Slf4jLogger }
 
-class Logger(logger: Slf4jLogger) {
-
-  def debug(message: String): IO[Unit] = {
-    IO.blocking(logger.debug(message))
-  }
-
-  def info(message: String): IO[Unit] = {
-    IO.blocking(logger.info(message))
-  }
-
-  def warn(message: String): IO[Unit] = {
-    IO.blocking(logger.warn(message))
-  }
-
-  def error(message: String): IO[Unit] = {
-    IO.blocking(logger.error(message))
-  }
-
+trait Logger[F[_]] {
+  def debug(message: String): F[Unit]
+  def info(message: String): F[Unit]
+  def warn(message: String): F[Unit]
+  def error(message: String): F[Unit]
 }
 
 object Logger {
 
-  def apply(name: Class[_]): IO[Logger] = {
-    IO.delay(new Logger(LoggerFactory.getLogger(name)))
+  def apply[F[_]: Sync](name: Class[_]): Logger[F] = impl(name.getCanonicalName)
+
+  private def impl[F[_]: Sync](name: String): Logger[F] = new Logger[F] {
+    private val logger = LoggerFactory.getLogger(name)
+    override def debug(message: String): F[Unit] = Sync[F].blocking(logger.debug(message))
+    override def info(message: String): F[Unit] = Sync[F].blocking(logger.info(message))
+    override def warn(message: String): F[Unit] = Sync[F].blocking(logger.warn(message))
+    override def error(message: String): F[Unit] = Sync[F].blocking(logger.error(message))
   }
 
 }

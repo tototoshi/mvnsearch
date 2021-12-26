@@ -1,4 +1,5 @@
-lazy val mvnsearch = project.in(file("."))
+lazy val mvnsearch = project
+  .in(file("."))
   .enablePlugins(BuildInfoPlugin)
   .settings(
     name := "mvnsearch",
@@ -15,8 +16,9 @@ lazy val mvnsearch = project.in(file("."))
       "io.circe" %% "circe-generic" % "0.14.1",
       "org.typelevel" %% "cats-effect" % "3.3.1",
       "org.http4s" %% "http4s-circe" % "1.0.0-M30",
+      "org.http4s" %% "http4s-dsl" % "1.0.0-M30",
       "org.http4s" %% "http4s-blaze-client" % "1.0.0-M30",
-      "org.scalatest" %% "scalatest" % "3.2.10" % "test",
+      "org.scalatest" %% "scalatest" % "3.2.10" % "test"
     ),
     buildInfoKeys := Seq[BuildInfoKey](name, version, scalaVersion, sbtVersion),
     buildInfoPackage := "com.github.tototoshi.mvnsearch.buildinfo",
@@ -25,7 +27,6 @@ lazy val mvnsearch = project.in(file("."))
     Test / publishArtifact := false,
     pomExtra := _pomExtra
   )
-
 
 def _publishTo(v: String) = {
   val nexus = "https://oss.sonatype.org/"
