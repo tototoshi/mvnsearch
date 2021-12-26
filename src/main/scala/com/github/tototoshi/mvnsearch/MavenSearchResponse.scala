@@ -2,7 +2,6 @@ package com.github.tototoshi.mvnsearch
 
 import io.circe._
 import io.circe.generic.semiauto._
-import io.circe.Decoder._
 
 object MavenSearchResponse {
 
@@ -17,4 +16,3 @@ object MavenSearchResponse {
   implicit val bodyDecoder: Decoder[Body] = deriveDecoder[Body]
 
 }
-

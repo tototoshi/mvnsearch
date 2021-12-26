@@ -1,6 +1,5 @@
 package com.github.tototoshi.mvnsearch
 
-import cats.Monad
 import cats.effect.Sync
 import org.slf4j.LoggerFactory
 
