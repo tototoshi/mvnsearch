@@ -1,6 +1,5 @@
 package com.github.tototoshi.mvnsearch
 
-import cats._
 import cats.effect._
 import cats.implicits._
 import org.http4s.EntityDecoder
@@ -9,6 +8,8 @@ import org.http4s.blaze.client.BlazeClientBuilder
 import org.http4s.circe._
 import org.http4s.client.dsl.Http4sClientDsl
 import org.http4s.implicits._
+import org.typelevel.log4cats.Logger
+import org.typelevel.log4cats.slf4j.Slf4jLogger
 
 trait MavenSearch[F[_]] {
   def search(config: Config): F[Seq[Dependency]]
@@ -20,9 +21,9 @@ object MavenSearch {
 
   implicit def impl[F[_]: Async]: MavenSearch[F] = new MavenSearch[F] {
 
-    implicit def mavenSearchResponseDecoder: EntityDecoder[F, MavenSearchResponse.Body] = jsonOf
+    implicit def logger: Logger[F] = Slf4jLogger.getLogger[F]
 
-    private val logger = Logger[F](MavenSearch.getClass)
+    implicit def mavenSearchResponseDecoder: EntityDecoder[F, MavenSearchResponse.Body] = jsonOf
 
     def search(config: Config): F[Seq[Dependency]] = {
       val dsl = new Http4sClientDsl[F] {}
@@ -37,7 +38,7 @@ object MavenSearch {
       for {
         response <- BlazeClientBuilder[F].resource
           .use(client => client.expect[MavenSearchResponse.Body](request))
-        _ <- logger.debug(response.toString)
+        _ <- Logger[F].debug(response.toString)
       } yield toDeps(response)
     }
 
