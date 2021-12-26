@@ -1,25 +1,32 @@
 package com.github.tototoshi.mvnsearch
 
 import cats.effect.IO
+import org.http4s.Request
+import org.http4s.blaze.client.BlazeClientBuilder
+import org.http4s.implicits._
 
 object MavenSearch {
 
   def search(config: Config): IO[Seq[Dependency]] = {
-    val params = Map("q" -> config.searchWord.mkString(" "), "rows" -> config.rows)
+    import MavenSearchResponse._
+    import org.http4s.circe.CirceEntityDecoder._
+
+    val params = Map("q" -> config.searchWord.mkString(" "), "rows" -> config.rows.toString)
+    val request = Request[IO](uri = uri"https://search.maven.org/solrsearch/select".withQueryParams(params))
+
     for {
       logger <- Logger(MavenSearch.getClass)
-      response <- Http.get("https://search.maven.org/solrsearch/select", params)
-      _ <- logger.debug(response)
-      response <- parseResponse(response)
+      response <- BlazeClientBuilder[IO].resource
+        .use(client => client.expect[MavenSearchResponse.Body](request))
+      _ <- logger.debug(response.toString)
+      response <- parseResponse(response.toString)
     } yield response
   }
 
   private def parseResponse(json: String): IO[Seq[Dependency]] = {
     import io.circe.parser._
     def toDep(body: MavenSearchResponse.Body): Seq[Dependency] =
-      body
-        .response
-        .docs
+      body.response.docs
         .map(item => Dependency(item.g, item.a, item.latestVersion))
 
     for {
