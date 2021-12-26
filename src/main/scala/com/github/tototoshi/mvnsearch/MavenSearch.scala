@@ -18,7 +18,7 @@ object MavenSearch {
 
   def apply[F[_]](implicit ev: MavenSearch[F]): MavenSearch[F] = ev
 
-  implicit def impl[F[_]: Async: FlatMap: Concurrent]: MavenSearch[F] = new MavenSearch[F] {
+  implicit def impl[F[_]: Async]: MavenSearch[F] = new MavenSearch[F] {
 
     implicit def mavenSearchResponseDecoder: EntityDecoder[F, MavenSearchResponse.Body] = jsonOf
 
