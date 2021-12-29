@@ -4,7 +4,7 @@ object Printer {
 
   def printSbt(dependency: Dependency): String = (dependency.scalaArtifact, dependency.scalaVersion) match {
     case (Some(sa), Some(sv)) =>
-      s""""${dependency.groupId}" %% "$sa" % "${dependency.version}" (for Scala $sv)"""
+      s""""${dependency.groupId}" %% "$sa" % "${dependency.version}"\t(for Scala $sv)"""
     case _ =>
       s""""${dependency.groupId}" % "${dependency.artifactId}" % "${dependency.version}""""
   }
