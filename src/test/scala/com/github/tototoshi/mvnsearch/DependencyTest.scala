@@ -20,4 +20,12 @@ class DependencyTest extends AnyFunSuite {
     assert(dep.scalaVersion === Some("3"))
   }
 
+  test("Parse artifactId (Unstable releases)") {
+    val g = "org.tpolecat"
+    val a = "doobie-core_3.0.0-RC2"
+    val latestVersion = "1.0.0-M2"
+    val dep = Dependency(g, a, latestVersion)
+    assert(dep.scalaVersion === Some("3.0.0-RC2"))
+  }
+
 }

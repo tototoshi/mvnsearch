@@ -17,7 +17,7 @@ package com.github.tototoshi.mvnsearch
 
 case class Dependency(groupId: String, artifactId: String, version: String) {
 
-  private val versionRegex = """(.*?)_(2\.\d+|3)$""".r
+  private val versionRegex = """(.*?)_(.*?)$""".r
 
   val (scalaArtifact, scalaVersion): (Option[String], Option[String]) = artifactId match {
     case versionRegex(a, v) => (Some(a), Some(v))
