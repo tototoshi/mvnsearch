@@ -20,6 +20,7 @@ lazy val mvnsearch = project
       "org.http4s" %% "http4s-blaze-client" % "1.0.0-M30",
       "org.scalatest" %% "scalatest" % "3.2.10" % "test"
     ),
+    run / fork := true,
     buildInfoKeys := Seq[BuildInfoKey](name, version, scalaVersion, sbtVersion),
     buildInfoPackage := "com.github.tototoshi.mvnsearch.buildinfo",
     publishMavenStyle := true,
