@@ -14,7 +14,7 @@ lazy val mvnsearch = project
       "io.circe" %% "circe-core" % "0.14.1",
       "io.circe" %% "circe-parser" % "0.14.1",
       "io.circe" %% "circe-generic" % "0.14.1",
-      "org.typelevel" %% "cats-effect" % "3.3.4",
+      "org.typelevel" %% "cats-effect" % "3.3.5",
       "org.http4s" %% "http4s-circe" % "1.0.0-M30",
       "org.http4s" %% "http4s-dsl" % "1.0.0-M30",
       "org.http4s" %% "http4s-blaze-client" % "1.0.0-M30",
