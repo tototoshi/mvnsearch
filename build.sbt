@@ -17,7 +17,7 @@ lazy val mvnsearch = project
       "org.typelevel" %% "cats-effect" % "3.3.14",
       "org.http4s" %% "http4s-circe" % "1.0.0-M34",
       "org.http4s" %% "http4s-dsl" % "1.0.0-M34",
-      "org.http4s" %% "http4s-blaze-client" % "1.0.0-M34",
+      "org.http4s" %% "http4s-blaze-client" % "1.0.0-M35",
       "org.scalatest" %% "scalatest" % "3.2.12" % "test"
     ),
     run / fork := true,
