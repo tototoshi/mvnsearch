@@ -18,7 +18,7 @@ lazy val mvnsearch = project
       "org.http4s" %% "http4s-circe" % "1.0.0-M35",
       "org.http4s" %% "http4s-dsl" % "1.0.0-M35",
       "org.http4s" %% "http4s-blaze-client" % "1.0.0-M35",
-      "org.scalatest" %% "scalatest" % "3.2.12" % "test"
+      "org.scalatest" %% "scalatest" % "3.2.13" % "test"
     ),
     run / fork := true,
     buildInfoKeys := Seq[BuildInfoKey](name, version, scalaVersion, sbtVersion),
