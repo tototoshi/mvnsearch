@@ -9,7 +9,7 @@ lazy val mvnsearch = project
     scalacOptions ++= Seq("-feature"),
     libraryDependencies ++= Seq(
       "com.github.scopt" %% "scopt" % "4.1.0",
-      "org.typelevel" %% "log4cats-slf4j" % "2.4.0",
+      "org.typelevel" %% "log4cats-slf4j" % "2.5.0",
       "ch.qos.logback" % "logback-classic" % "1.2.11",
       "io.circe" %% "circe-core" % "0.14.2",
       "io.circe" %% "circe-parser" % "0.14.2",
