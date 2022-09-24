@@ -1,3 +1,5 @@
+val http4sVersion = "1.0.0-M36"
+
 lazy val mvnsearch = project
   .in(file("."))
   .enablePlugins(BuildInfoPlugin)
@@ -15,9 +17,9 @@ lazy val mvnsearch = project
       "io.circe" %% "circe-parser" % "0.14.3",
       "io.circe" %% "circe-generic" % "0.14.3",
       "org.typelevel" %% "cats-effect" % "3.3.14",
-      "org.http4s" %% "http4s-circe" % "1.0.0-M35",
-      "org.http4s" %% "http4s-dsl" % "1.0.0-M35",
-      "org.http4s" %% "http4s-blaze-client" % "1.0.0-M35",
+      "org.http4s" %% "http4s-circe" % http4sVersion,
+      "org.http4s" %% "http4s-dsl" % http4sVersion,
+      "org.http4s" %% "http4s-blaze-client" % http4sVersion,
       "org.scalatest" %% "scalatest" % "3.2.13" % "test"
     ),
     run / fork := true,
