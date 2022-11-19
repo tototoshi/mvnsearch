@@ -12,7 +12,7 @@ lazy val mvnsearch = project
     libraryDependencies ++= Seq(
       "com.github.scopt" %% "scopt" % "4.1.0",
       "org.typelevel" %% "log4cats-slf4j" % "2.5.0",
-      "ch.qos.logback" % "logback-classic" % "1.4.1",
+      "ch.qos.logback" % "logback-classic" % "1.4.5",
       "io.circe" %% "circe-core" % "0.14.3",
       "io.circe" %% "circe-parser" % "0.14.3",
       "io.circe" %% "circe-generic" % "0.14.3",
