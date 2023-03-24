@@ -1,4 +1,4 @@
-val http4sVersion = "1.0.0-M36"
+val http4sVersion = "1.0.0-M38"
 
 lazy val mvnsearch = project
   .in(file("."))
